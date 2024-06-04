@@ -57,6 +57,7 @@ QuantumBot is a cloud-based application designed to handle chat messages. It use
 ## Project Structure
 
 
+
 ### Root Directory
 
 - **.gitignore**: Specifies files and directories that should be ignored by Git. This is crucial for excluding sensitive information and dependencies from being tracked in version control.
@@ -70,6 +71,39 @@ This directory contains all the Firebase Cloud Functions code and related config
 - **functions/api/**: This folder contains individual function modules, each encapsulating a specific functionality.
 
   - **addMessage.js**: This file defines the `addMessage` function, which is a Firebase Cloud Function designed to handle incoming requests to add chat messages. It validates input data, constructs the message object, and stores it in Firestore.
+
+    #### Request Schema
+    The request to the `addMessage` function should be a JSON object with the following structure:
+    ```json
+    {
+      "text": "string",
+      "userId": "string"
+    }
+    ```
+    - **text**: The content of the chat message (required).
+    - **userId**: The ID of the user sending the message (required).
+
+    #### Response Schema
+    The response from the `addMessage` function will be a JSON object indicating the status of the operation:
+    ```json
+    {
+      "status": "string",
+      "messageId": "string"
+    }
+    ```
+    - **status**: Indicates the result of the operation ("success" if the message was added successfully).
+    - **messageId**: The unique identifier of the added message in Firestore.
+
+    #### Error Handling
+    If the request is invalid or an error occurs during the message addition process, the function will throw an `HttpsError` with an appropriate status and message:
+    ```json
+    {
+      "status": "error",
+      "message": "string"
+    }
+    ```
+    - **status**: Indicates the result of the operation ("error" if the message could not be added).
+    - **message**: A detailed error message describing the issue.
 
 - **functions/index.js**: The entry point for the Firebase Cloud Functions. It imports and initializes individual functions from the `api` directory and other modules as needed. This file ensures that all functions are properly exported and available for Firebase to handle.
 
