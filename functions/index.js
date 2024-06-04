@@ -7,10 +7,11 @@
  * See a full list of supported triggers at https://firebase.google.com/docs/functions
  */
 
+// Importing the functions and admin modules
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
-// Initialize Firebase Admin SDK if not already initialized
+// Initialize Firebase Admin SDK 
 if (!admin.apps.length) {
   admin.initializeApp();
 }

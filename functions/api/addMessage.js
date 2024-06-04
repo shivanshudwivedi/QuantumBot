@@ -1,14 +1,19 @@
+// Importing the functions and admin modules
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
+// Initialize Firebase Admin SDK
 if (!admin.apps.length) {
   admin.initializeApp();
 }
 
+// Add logger
 const { logger } = functions;
 
+// Add message funtion
 exports.addMessage = functions.https.onCall(async (data, context) => {
   try {
+    // Log request data
     logger.log("Received message request data:", data);
 
     // Validate required fields
@@ -19,7 +24,7 @@ exports.addMessage = functions.https.onCall(async (data, context) => {
         "Required fields (text or userId) are missing",
       );
     }
-
+    // Validate userId & text data
     const { text, userId } = data;
 
     // Construct message data
@@ -37,6 +42,7 @@ exports.addMessage = functions.https.onCall(async (data, context) => {
       .collection("messages")
       .add(messageData);
 
+      // Log success
     logger.log("Message added successfully, message id:", messageRef.id);
 
     // Return success status
