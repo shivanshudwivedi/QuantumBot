@@ -8,8 +8,7 @@ QuantumBot is a comprehensive project that leverages Firebase Cloud Functions an
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Overview
 QuantumBot is a cloud-based application designed to handle chat messages. It uses Firebase Cloud Functions to process requests and Firestore as the database to store messages. This setup ensures scalability, reliability, and ease of deployment.
